@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="/stylesheets/App.css" />
+		<link rel="stylesheet" href="/stylesheets/app.scss" />
+		<link rel="stylesheet" href="/stylesheets/join.css" />
+
+		<script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+	</head>
+	<body>
+		<% isLoading = false %> <% if (isLoading) { %>
+		<h1 style="margin-top: 120px; text-align: center">Loading...</h1>
+
+		<% } else { %>
+		<div class="container joinmeetingpage">
+			<div style="width: 50%; height: 100%">
+				<div style="text-align: center">
+					<div class="logo">
+						<img src="/images/new logo.png" alt="" />
+					</div>
+					<h3 class="intro" style="color: white; font-weight: 400">
+						Join Meeting
+					</h3>
+				</div>
+				<div class="copylink">
+					<div style="position: relative">
+						<div
+							class="icons-join-code"
+							style="left: calc(100% - 31px); z-index: 1"
+						>
+							<button
+								onClick="{copyLink}"
+								style="
+									background-color: transparent;
+									outline: none;
+									border: none;
+									cursor: pointer;
+								"
+							>
+								[]
+							</button>
+						</div>
+						<input
+							class="join-code-input"
+							id="join-code-input"
+							value=""
+							readOnly
+							style="
+								width: 100%;
+								padding-left: 0;
+								padding-right: 32px;
+								opacity: 0.78;
+								border-bottom-color: #fed834;
+								outline: none;
+							"
+						/>
+					</div>
+				</div>
+				<div
+					style="
+						display: flex;
+						justify-content: center;
+						margin-bottom: 0;
+					"
+				>
+					<div class="join-meeting">
+						<form style="display: flex">
+							<div class="input-group">
+								<div class="prefix">
+									<i class="far fa-keyboard"></i>
+								</div>
+								<input
+									class="textfield"
+									type="text"
+									id="username"
+									placeholder="Enter your name"
+									value=""
+									required
+								/>
+							</div>
+							<button
+								class="primary"
+								style="margin-left: 24px"
+								type="button"
+								onclick="startMeeting()"
+							>
+								<span style="font-size: 18px"
+									>Join meeting
+								</span>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div style="width: 50%; position: relative">
+				<div
+					class="main-video"
+					style="
+						border-radius: 6px;
+						background: transparent;
+						height: 312px;
+					"
+				>
+					<video
+						autoPlay
+						playsInline
+						muted
+						id="videoElement"
+						style="
+							border-radius: 6px;
+							background: #1c1c1c;
+							height: 100%;
+						"
+						class="flip"
+					></video>
+				</div>
+				<div
+					class="footer"
+					style="
+						position: absolute;
+						width: 200px;
+						left: 50%;
+						bottom: 0;
+						transform: translateX(-50%);
+						display: flex;
+						justify-content: space-evenly;
+					"
+				>
+					<div class="tooltip">
+						<button
+							class="normal main_controls_button main_mute_button"
+							onclick="muteUnmute()"
+						>
+							<i class="green fas fa-microphone"></i>
+						</button>
+					</div>
+					<div class="tooltip">
+						<button
+							class="
+								normal
+								main_video_button main_controls_button
+							"
+							onclick="playStop()"
+						>
+							<i class="green fas fa-video"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% } %>
+		<script>
+			const myVideoStream = document.getElementById('videoElement');
+			document.getElementById('join-code-input').value =
+				window.location.href;
+		</script>
+		<script src="/js/index.js"></script>
+	</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="/stylesheets/App.css" />
+		<link rel="stylesheet" href="/stylesheets/meeting.css" />
+		<link rel="stylesheet" href="/stylesheets/app.scss" />
+		<script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+	</head>
+
+	<body>
+		<script>
+			<% meeting = true %> ,
+			meeting = true
+		</script>
+		<!-- <div class="dialog-asking-backdrop">
+			<div style="text-align: center" class="dialog-asking">
+				<h2>Waiting for response</h2>
+				...
+			</div>
+		</div> -->
+
+		<% if (meeting) { %>
+		<div class="container-full min" style="padding: 0; min-height: 100vh">
+			<div style="padding: 0; display: flex; height: 100%">
+				<div style="flex: 1; display: flex; justify-content: center">
+					<div style="max-height: 80vh; width: 100%; padding: 3px">
+						<video
+							ref="{videoElem}"
+							style="
+								height: 100%;
+								object-fit: contain;
+								border-radius: 5px;
+								border: 1px solid lightgrey;
+							"
+							autoPlay
+							playsInline
+							muted
+							loop
+							src="/images/gif.webm"
+						></video>
+						<div
+							id="mydiv"
+							style="position: absolute; top: 0; z-index: 9"
+						>
+							<div id="mydivheader">
+								<video
+									id="meeting_video"
+									autoPlay
+									playsInline
+									muted
+									class="flip"
+								></video>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="footer">
+				<span class="participant-count"> 💻 Participants: 16 </span>
+				<!-- <div class="tooltip">
+					<button class="normal" onClick="{onClick}" disabled>
+						<i class="fas fa-microphone"></i>
+					</button>
+					<span class="tooltiptext">Mic</span>
+				</div> -->
+				<!-- <div class="tooltip">
+					<button class="normal" onClick="{onClick}" disabled>
+						<i class="fas fa-desktop"></i>
+					</button>
+					<span class="tooltiptext">Share Screen</span>
+				</div> -->
+
+				<div class="tooltip">
+					<button class="normal" onclick="setChatBox()">
+						<i class="fas fa-comment-alt"></i>
+					</button>
+					<span class="tooltiptext">Chat</span>
+				</div>
+
+				<div class="tooltip">
+					<button
+						class="normal main_video_button main_controls_button"
+						onclick="playStop()"
+					>
+						<i class="fas fa-video"></i>
+					</button>
+					<span class="tooltiptext">Video</span>
+				</div>
+
+				<!-- <div class="tooltip">
+					<button class="normal" onClick="{onClick}">
+						<i class="fas fa-hand-paper"></i>
+					</button>
+					<span class="tooltiptext">Raise Hand</span>
+				</div> -->
+				<div class="tooltip">
+					<button class="normal" onClick="{onClick}">
+						<i class="fas fa-sign-out-alt"></i>
+					</button>
+					<span class="tooltiptext">Leave Meeting</span>
+				</div>
+				<!-- {props.filterParticipants && (
+				  <input
+					class="input-search"
+					type="text"
+					placeholder="Search participants"
+					title="Search participants"
+				  />
+				)} -->
+			</div>
+			<!-- <div
+				id="participant_grid"
+				style="height: 200px; background-color: aliceblue"
+			></div> -->
+		</div>
+		<% } %>
+		<script>
+			var chatbox_visible = document.querySelector('.chatbox-visible');
+			var chatBoxVisible = true;
+			const setChatBox = () => {
+				if (chatbox_visible.style.display === 'none') {
+					chatbox_visible.style.display = 'block';
+				} else {
+					chatbox_visible.style.display = 'none';
+				}
+			};
+
+			dragElement(document.getElementById('mydiv'));
+
+			function dragElement(elmnt) {
+				var pos1 = 0,
+					pos2 = 0,
+					pos3 = 0,
+					pos4 = 0;
+				if (document.getElementById(elmnt.id + 'header')) {
+					/* if present, the header is where you move the DIV from:*/
+					document.getElementById(elmnt.id + 'header').onmousedown =
+						dragMouseDown;
+				} else {
+					/* otherwise, move the DIV from anywhere inside the DIV:*/
+					elmnt.onmousedown = dragMouseDown;
+				}
+
+				function dragMouseDown(e) {
+					e = e || window.event;
+					e.preventDefault();
+					// get the mouse cursor position at startup:
+					pos3 = e.clientX;
+					pos4 = e.clientY;
+					document.onmouseup = closeDragElement;
+					// call a function whenever the cursor moves:
+					document.onmousemove = elementDrag;
+				}
+
+				function elementDrag(e) {
+					e = e || window.event;
+					e.preventDefault();
+					// calculate the new cursor position:
+					pos1 = pos3 - e.clientX;
+					pos2 = pos4 - e.clientY;
+					pos3 = e.clientX;
+					pos4 = e.clientY;
+					// set the element's new position:
+					elmnt.style.top = elmnt.offsetTop - pos2 + 'px';
+					elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
+				}
+
+				function closeDragElement() {
+					/* stop moving when mouse button is released:*/
+					document.onmouseup = null;
+					document.onmousemove = null;
+				}
+			}
+
+			const myVideoStream = document.getElementById('meeting_video');
+			// const participantGrid = document.getElementById('participant_grid');
+			// console.log(participantGrid + 'meeting');
+		</script>
+		<script src="/js/index.js"></script>
+	</body>
+</html>

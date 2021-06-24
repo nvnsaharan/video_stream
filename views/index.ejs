@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="/stylesheets/App.css" />
+		<link rel="stylesheet" href="/stylesheets/app.scss" />
+	</head>
+	<body>
+		<div
+			class="container"
+			style="min-height: 100vh; display: flex; align-items: center"
+		>
+			<div style="width: 100%; height: 100%">
+				<div style="text-align: center">THT</div>
+				<div
+					style="
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						flex-wrap: wrap;
+						margin-top: 64px;
+					"
+				>
+					<button
+						type="button"
+						class="primary"
+						style="margin-left: 24px"
+						onclick="respondAccessLevel()"
+					>
+						+
+						<span style="margin-left: 8px; font-size: 18px">
+							Start new meeting
+						</span>
+					</button>
+
+					<span style="margin: 20px">OR</span>
+
+					<form class="join-meeting">
+						<div class="input-group" style="position: relative">
+							<div class="prefix">[_]</div>
+							<input
+								class="textfield"
+								type="text"
+								id="meetingcode"
+								placeholder="Enter meeting code"
+								onchange="setMeetingId()"
+								style="padding-right: 47px; font-size: 18px"
+							/>
+
+							<button
+								type="button"
+								onclick="handleSubmit()"
+								style="
+									background-color: transparent;
+									color: #fed834;
+									position: absolute;
+									top: 50%;
+									transform: translateY(-50%);
+									right: 8px;
+									border: none;
+									outline: none;
+									cursor: pointer;
+									font-size: 18px;
+									font-weight: 400;
+								"
+							>
+								Join
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="/js/index.js"></script>
+	</body>
+</html>
